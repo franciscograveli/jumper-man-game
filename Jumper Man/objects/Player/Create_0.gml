@@ -10,6 +10,7 @@ tile_map_ground = layer_tilemap_get_id("Platforms")
 collisions = [tile_map_ground]
 
 //globals
+can_take_damage = true;
 global.tempo = 60;
 global.oxygen = 0;
 if (!variable_global_exists("spawn_x")) {

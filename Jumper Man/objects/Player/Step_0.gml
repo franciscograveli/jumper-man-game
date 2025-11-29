@@ -52,3 +52,7 @@ if (_movementY >= 0) {
 } else {
     y += _movementY;
 }
+
+if (!place_meeting(x, y, Enemy)) {
+    can_take_damage = true;
+}
