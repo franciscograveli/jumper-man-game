@@ -13,6 +13,7 @@ collisions = [tile_map_ground]
 can_take_damage = true;
 global.tempo = 60;
 global.oxygen = 0;
+global.tutorialFase = -1;
 if (!variable_global_exists("spawn_x")) {
     global.spawn_x = x;
 }
@@ -25,7 +26,8 @@ y = global.spawn_y;
 //ajustar tela proporcionalmente
 window_w = 1280;
 window_h = 720;
-window_set_size(window_w, window_h);
-display_set_gui_size(window_w, window_h);
+//window_set_size(window_w, window_h);
+display_set_gui_size(window_get_width(), window_get_height());
 window_center();
 
+draw_set_font(obj_font_small);
