@@ -2,16 +2,19 @@ grav = 0.5
 move_speed = 2
 _movementY = 0
 _movementX = 0
-jump_force = 10
+jump_force = 8.5
 maxJumps = 0
 maxFall = 5;
 
 tile_map_ground = layer_tilemap_get_id("Platforms")
-collisions = [tile_map_ground]
+tile_map_walls = layer_tilemap_get_id("WallsTiles")
+
+collisions = [tile_map_ground, tile_map_walls]
 
 //globals
 can_take_damage = true;
-global.tempo = 60;
+global.tempo = 30;
+
 global.oxygen = 0;
 global.tutorialFase = -1;
 if (!variable_global_exists("spawn_x")) {

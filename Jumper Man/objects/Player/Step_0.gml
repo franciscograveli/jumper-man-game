@@ -4,7 +4,7 @@ k_left  = keyboard_check(vk_left);
 k_jump  = keyboard_check_pressed(vk_space);
 
 // GRAVIDADE + CHÃO
-_onGround = (_movementY >= 0) && place_meeting(x, y + 2, collisions);
+_onGround = (_movementY >= 0) && place_meeting(x, y + 2, tile_map_ground);
 
 if (_onGround) {
     _movementY = 0;
@@ -23,14 +23,29 @@ if (k_jump && (_onGround || maxJumps > 0)) {
     maxJumps -= 1;
 }
 
+// ======================
 // MOVIMENTO X
+// ======================
 _movementX = (k_right - k_left) * move_speed;
 
 if (_movementX != 0) {
     image_xscale = sign(_movementX);
 }
 
-move_and_collide(_movementX, 0, collisions, 5);
+// --- MOVER X ---
+if (place_meeting(x + _movementX, y, tile_map_walls)) {
+        _movementX = 0;
+ }else{
+	move_and_collide(_movementX, 0, tile_map_ground, 5);
+ }
+// ---- DESLIZE DA PAREDE (AGORA SIM, NO LUGAR CERTO) ----
+if (!_onGround) {
+    if (place_meeting(x + 2, y, tile_map_walls) || place_meeting(x - 2, y, tile_map_walls)) {
+        _movementX = 0;
+		move_and_collide(_movementX, 0, tile_map_ground, 5);
+
+    }
+}
 
 // SPRITES
 if (!_onGround && _movementY < 0) {
@@ -46,13 +61,20 @@ else {
 // LIMITADOR DE QUEDA
 _movementY = clamp(_movementY, -10000, maxFall);
 
+// ======================
 // MOVIMENTO Y
+// ======================
 if (_movementY >= 0) {
-    move_and_collide(0, _movementY, collisions, 20);
+    move_and_collide(0, _movementY, tile_map_ground, 20);
 } else {
     y += _movementY;
 }
 
+// DANO
 if (!place_meeting(x, y, Enemy)) {
     can_take_damage = true;
+}
+
+if(global.tempo <= 0){
+	instance_destroy();
 }
