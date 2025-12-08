@@ -11,7 +11,7 @@ if (other.can_take_damage) {
 	}else{
 		global.tempo -= 15;
 	}
-    var dir = sign(other.x - x);
+    var dir = sign(other.x - x) * -1;
 
     var acrescimo = 30 * dir;
 

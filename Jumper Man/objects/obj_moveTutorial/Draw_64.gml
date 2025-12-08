@@ -5,8 +5,16 @@ if (global.tutorialFase != -1) {
 
     var cx = display_get_gui_width()  * 0.5;
     var cy = display_get_gui_height() / 3;
-
-    draw_text(cx, cy - 10, "Fase Tutorial");
+	
+	if(global.tutorialFase != 4 && global.tutorialFase != 5){
+		draw_text(cx, cy - 10, "Fase Tutorial");
+	}else if(global.tutorialFase = 4){
+		draw_set_colour(c_red);
+	}else{
+		draw_set_colour(c_yellow);
+		draw_text(cx, cy - 10, "Jumper Man");
+		draw_set_colour(c_white);
+	}
 
     var textos = [
         [
@@ -27,6 +35,13 @@ if (global.tutorialFase != -1) {
         [
             "OPS!!",
             "Bob, caindo no buraco voce pode acabar voltando no inicio da jornada."
+        ],
+		[
+            "Game Over!"
+        ],
+		[
+            "Start Game!!",
+			"Aperte [ENTER] para comecar o jogo."
         ]
     ];
 
