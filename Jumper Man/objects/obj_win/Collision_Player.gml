@@ -1,1 +1,1 @@
-instance_destroy(Player)
+room_goto(WinGame);
